@@ -1,15 +1,19 @@
 import pandas as pd
 import numpy as np
-import math
-import statistics
 from sklearn.linear_model import LinearRegression as SKLinearRegression
+import plotly.graph_objects as go
 from sklearn.metrics import (
     mean_squared_error as sk_mse,
     root_mean_squared_error as sk_rmse,
     mean_absolute_error as sk_mae,
     r2_score as sk_r2,
 )
-import plotly.graph_objects as go
+from metrics.metrics import (
+    mean_squared_error,
+    mean_absolute_error,
+    root_mean_squared_error,
+    r_squared,
+)
 
 
 class LinearRegression:
@@ -34,40 +38,6 @@ class LinearRegression:
 
     def predict(self, X):
         return self.beta_0 + self.beta_1 * X
-
-
-def mean_squared_error(y_true, y_pred):
-    m = len(y_true)
-    ssr = sum((y_true - y_pred) ** 2)
-    mse = ssr / m
-
-    return mse
-
-
-def root_mean_squared_error(y_true, y_pred):
-    mse = mean_squared_error(y_true, y_pred)
-    rmse = math.sqrt(mse)
-
-    return rmse
-
-
-def mean_absolute_error(y_true, y_pred):
-    m = len(y_true)
-    sum_of_absolutes = sum(abs(y_true - y_pred))
-    mae = sum_of_absolutes / m
-
-    return mae
-
-
-def r_squared(y_true, y_pred):
-    ssr = sum((y_true - y_pred) ** 2)
-
-    y_mean = statistics.mean(y_true)
-    sst = sum((y_true - y_mean) ** 2)
-
-    r_squared = 1 - (ssr / sst)
-
-    return r_squared
 
 
 if __name__ == "__main__":
